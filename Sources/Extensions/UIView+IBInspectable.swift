@@ -20,8 +20,8 @@ public extension UIView {
     
     @IBInspectable
     var isSkeletonable: Bool {
-        get { return skeletonable }
-        set { skeletonable = newValue }
+        get { return objc_getAssociatedObject(self, &AssociatedKeys.skeletonable) as? Bool ?? false }
+        set { objc_setAssociatedObject(self, &AssociatedKeys.skeletonable, newValue, AssociationPolicy.retainNonatomic.objc) }
     }
     
     var isSkeletonActive: Bool {
@@ -54,11 +54,6 @@ extension UIView {
     var skeletonIsAnimated: Bool! {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.isSkeletonAnimated) as? Bool ?? false }
         set { objc_setAssociatedObject(self, &AssociatedKeys.isSkeletonAnimated, newValue, AssociationPolicy.retain.objc) }
-    }
-
-    var skeletonable: Bool! {
-        get { return objc_getAssociatedObject(self, &AssociatedKeys.skeletonable) as? Bool ?? false }
-        set { objc_setAssociatedObject(self, &AssociatedKeys.skeletonable, newValue, AssociationPolicy.retain.objc) }
     }
 }
 
